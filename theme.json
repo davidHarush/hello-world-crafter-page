@@ -1,0 +1,159 @@
+{
+    "theme": {
+      "colors": {
+        "primaryLight": "#FF469D",
+        "primary": "#FF0080",
+        "secondary": "#000000",
+        "background": "#FFFFFF",
+        "backgroundMuted": "#F7F7FA",
+        "text": "#181F2F",
+        "textMuted": "#6B7280",
+        "accent": "#FFEEF3",
+        "cardBackground": "#FFFFFF",
+        "cardBackgroundDark": "#1A1A1A"
+      },
+      "spacing": {
+        "unit": "8px"
+      },
+      "borderRadius": {
+        "small": "4px",
+        "base": "8px",
+        "button": "24px",
+        "card": "16px",
+        "pill": "999px"
+      },
+      "shadows": {
+        "card": "0 4px 12px rgba(0, 0, 0, 0.05)"
+      },
+      "typography": {
+        "fontFamily": "Inter, sans-serif",
+        "fontSizes": {
+          "xs": "12px",
+          "sm": "14px",
+          "md": "16px",
+          "lg": "24px",
+          "xl": "48px"
+        },
+        "fontWeights": {
+          "regular": 400,
+          "medium": 500,
+          "semibold": 600,
+          "bold": 700
+        },
+        "lineHeights": {
+          "normal": 1.5,
+          "tight": 1.2
+        }
+      }
+    },
+    "layout": {
+      "container": {
+        "maxWidth": "1200px",
+        "margin": "0 auto",
+        "padding": "0 24px"
+      },
+      "grid": {
+        "columns": 12,
+        "gutter": "24px"
+      }
+    },
+    "components": {
+      "heroSection": {
+        "display": "grid",
+        "gridTemplateColumns": "7fr 5fr",
+        "alignItems": "center",
+        "gap": "24px",
+        "padding": "80px 0"
+      },
+      "heading": {
+        "fontSize": "48px",
+        "fontWeight": 700,
+        "lineHeight": 1.2,
+        "color": "var(--color-text)",
+        "marginBottom": "16px"
+      },
+      "subheading": {
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "lineHeight": 1.5,
+        "color": "var(--color-textMuted)",
+        "maxWidth": "500px",
+        "marginBottom": "32px"
+      },
+      "buttonPrimary": {
+        "padding": "14px 32px",
+        "fontSize": "16px",
+        "fontWeight": 600,
+        "borderRadius": "var(--borderRadius-button)",
+        "backgroundImage": "linear-gradient(90deg, var(--color-primaryLight) 0%, var(--color-primary) 100%)",
+        "color": "#FFFFFF",
+        "border": "none",
+        "cursor": "pointer"
+      },
+      "buttonSecondary": {
+        "padding": "14px 32px",
+        "fontSize": "16px",
+        "fontWeight": 600,
+        "borderRadius": "var(--borderRadius-button)",
+        "backgroundColor": "var(--color-secondary)",
+        "color": "#FFFFFF",
+        "border": "none",
+        "cursor": "pointer"
+      },
+      "metrics": {
+        "display": "flex",
+        "gap": "48px",
+        "marginTop": "40px"
+      },
+      "metricItem": {
+        "textAlign": "center"
+      },
+      "metricValue": {
+        "fontSize": "24px",
+        "fontWeight": 600,
+        "color": "var(--color-text)"
+      },
+      "metricLabel": {
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "color": "var(--color-textMuted)",
+        "marginTop": "4px"
+      },
+      "analyticsCard": {
+        "backgroundColor": "var(--cardBackground)",
+        "borderRadius": "var(--borderRadius-card)",
+        "boxShadow": "var(--shadows-card)",
+        "padding": "24px",
+        "width": "100%",
+        "maxWidth": "280px"
+      },
+      "profileCard": {
+        "backgroundColor": "var(--color-secondary)",
+        "borderRadius": "var(--borderRadius-card)",
+        "padding": "24px",
+        "width": "100%",
+        "maxWidth": "280px",
+        "color": "#FFFFFF"
+      },
+      "collectionsSection": {
+        "backgroundColor": "var(--cardBackground)",
+        "borderRadius": "var(--borderRadius-card)",
+        "padding": "16px 24px",
+        "width": "100%",
+        "maxWidth": "600px"
+      },
+      "collectionPill": {
+        "display": "inline-block",
+        "padding": "8px 16px",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "borderRadius": "var(--borderRadius-pill)",
+        "backgroundColor": "#F3F3F3",
+        "color": "var(--color-text)",
+        "marginRight": "8px",
+        "marginBottom": "8px",
+        "cursor": "pointer"
+      }
+    }
+  }
+  
