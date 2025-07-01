@@ -6,11 +6,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ArrowLeft, AlertCircle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { AlertCircle } from "lucide-react";
+import AppHeader from "../components/AppHeader";
 
 const NewPost = () => {
-  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [postLength, setPostLength] = useState('5');
@@ -18,9 +17,6 @@ const NewPost = () => {
   // Mock profile completeness check - in real app this would come from user data
   const isProfileIncomplete = true;
 
-  const handleBack = () => {
-    navigate('/home');
-  };
 
 
   const handleGenerate = () => {
@@ -39,32 +35,17 @@ const NewPost = () => {
   return (
     <div className="min-h-screen bg-[#1A1A1A] text-[#E0E0E0]">
       {/* Header */}
-      <header className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleBack}
-                className="text-[#E0E0E0] hover:text-white hover:bg-gray-800"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
-              </Button>
-              <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-                PostCrafter
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <Avatar className="w-10 h-10">
-                <AvatarImage src="" alt="User" />
-                <AvatarFallback className="bg-pink-500 text-white">U</AvatarFallback>
-              </Avatar>
-            </div>
+      <AppHeader
+        showBack
+        rightContent={
+          <div className="flex items-center gap-4">
+            <Avatar className="w-10 h-10">
+              <AvatarImage src="" alt="User" />
+              <AvatarFallback className="bg-pink-500 text-white">U</AvatarFallback>
+            </Avatar>
           </div>
-        </div>
-      </header>
+        }
+      />
 
       {/* Main Content */}
       <main className="max-w-2xl mx-auto px-6 py-12">
