@@ -1,14 +1,28 @@
+
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlusCircle, History, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
 const Home = () => {
   const navigate = useNavigate();
+  
   const handleLogout = () => {
     navigate('/');
   };
-  return <div className="min-h-screen bg-gray-900 text-white">
+
+  const handleCreatePost = () => {
+    navigate('/new-post');
+  };
+
+  const handleViewHistory = () => {
+    // TODO: Navigate to history page when implemented
+    console.log('Navigate to history page');
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
       <header className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -54,7 +68,10 @@ const Home = () => {
                 <p className="text-gray-300 mb-6 flex-1">
                   Generate engaging LinkedIn content with AI in minutes
                 </p>
-                <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3 mt-auto">
+                <Button 
+                  onClick={handleCreatePost}
+                  className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3 mt-auto"
+                >
                   Start Creating
                 </Button>
               </CardContent>
@@ -69,7 +86,10 @@ const Home = () => {
                 <p className="text-gray-300 mb-6 flex-1">
                   View, edit, and republish your previous posts
                 </p>
-                <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3 mt-auto">
+                <Button 
+                  onClick={handleViewHistory}
+                  className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3 mt-auto"
+                >
                   View History
                 </Button>
               </CardContent>
@@ -80,6 +100,8 @@ const Home = () => {
           
         </div>
       </main>
-    </div>;
+    </div>
+  );
 };
+
 export default Home;
