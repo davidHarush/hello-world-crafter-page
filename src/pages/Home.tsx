@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardTitle } from "@/components/ui/card";
 import { PlusCircle, History, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 const Home = () => {
@@ -8,6 +8,9 @@ const Home = () => {
   const handleLogout = () => {
     navigate('/');
   };
+  // Temporary subscription data -- replace with real values
+  const plan = "Starter";
+  const postsRemaining = 3;
   return <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
       <header className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
@@ -43,40 +46,35 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Primary Actions */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:transform hover:scale-105">
-              <CardHeader className="text-center pb-4">
-                <PlusCircle className="w-12 h-12 text-pink-400 mx-auto mb-4" />
-                <CardTitle className="text-2xl text-white">Create New Post</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-300 mb-6">
-                  Generate engaging LinkedIn content with AI in minutes
-                </p>
-                <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3">
-                  Start Creating
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:transform hover:scale-105">
-              <CardHeader className="text-center pb-4">
-                <History className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-                <CardTitle className="text-2xl text-white">Posts History</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-300 mb-6">
-                  View, edit, and republish your previous posts
-                </p>
-                <Button variant="outline" className="w-full border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white rounded-full py-3">
-                  View History
-                </Button>
-              </CardContent>
-            </Card>
+          {/* Subscription Status */}
+          <div className="mx-auto w-fit rounded-full bg-gray-800/70 px-4 py-2 text-sm text-gray-300">
+            {plan === "Pro" ? `You’re on the Pro plan – unlimited posts included` : `Starter plan – ${postsRemaining} out of 8 posts remaining this month`}
           </div>
 
-          {/* Subscription Status */}
+          {/* Primary Actions */}
+          <div className="grid items-stretch md:grid-cols-2 gap-6">
+            <Card className="flex h-full flex-col bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:scale-105 px-6 py-8">
+              <div className="flex flex-col flex-1 text-center">
+                <PlusCircle className="w-12 h-12 text-pink-400 mb-4 mx-auto" />
+                <CardTitle className="text-2xl font-bold mb-2">Create New Post</CardTitle>
+                <p className="text-gray-300 mb-6">Generate engaging LinkedIn content with AI in minutes</p>
+                <div className="mt-auto">
+                  <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3">Start Creating</Button>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="flex h-full flex-col bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:scale-105 px-6 py-8">
+              <div className="flex flex-col flex-1 text-center">
+                <History className="w-12 h-12 text-purple-400 mb-4 mx-auto" />
+                <CardTitle className="text-2xl font-bold mb-2">Posts History</CardTitle>
+                <p className="text-gray-300 mb-6">View, edit, and republish your previous posts</p>
+                <div className="mt-auto">
+                  <Button variant="outline" className="w-full border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white rounded-full py-3">View History</Button>
+                </div>
+              </div>
+            </Card>
+          </div>
           
         </div>
       </main>
