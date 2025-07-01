@@ -4,8 +4,7 @@
 
 > **Tech Notes:**
 > - Development begins using **Lovable**, synchronized with **GitHub**
-> - **Cursor IDE** will be used in parallel, primarily for UI and design work
-> - **Lovable** will manage logic and backend connections (Supabase, n8n, Google, LinkedIn, PayPal)
+> - Lovable will manage logic and backend connections (Supabase, n8n, Google, LinkedIn, PayPal)
 > - Uses **PayPal** for payments
 > - Uses **Supabase** for managing users, posts, subscriptions, and external service connections
 > - **n8n** is responsible solely for AI-based content creation workflows
