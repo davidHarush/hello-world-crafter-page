@@ -14,7 +14,7 @@ const Pricing = () => {
     features: ["Unlimited AI-generated posts", "Professional templates and tone options", "Google Sign-in", "Direct LinkedIn publishing"],
     highlight: true
   }];
-  return <section className="py-20 bg-[#0D0F1A] text-white">
+  return <section className="py-20 bg-[#1A1A1A] text-[#E0E0E0]">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
@@ -36,7 +36,9 @@ const Pricing = () => {
                 </ul>
               </div>
               <div className="mt-auto pt-8">
-                <Button className="w-full bg-pink-600 hover:bg-pink-500 text-white px-0 text-xl py-[24px]">Get Started</Button>
+                <Button className="w-full rounded-full bg-[#00BFA6] text-white hover:brightness-110 px-0 text-xl py-[24px]">
+                  {plan.name === 'Pro' ? 'Become Pro' : 'Get Started'}
+                </Button>
               </div>
             </div>)}
         </div>

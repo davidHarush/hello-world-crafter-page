@@ -36,13 +36,13 @@ const Benefits = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-800/50">
+    <section className="py-20 bg-[#1A1A1A] text-[#E0E0E0]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             Why Choose <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">PostCrafter</span>?
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-[#E0E0E0] max-w-2xl mx-auto">
             Transform your LinkedIn presence and grow your professional network with AI-powered content creation
           </p>
         </div>
@@ -52,7 +52,7 @@ const Benefits = () => {
             <div key={index} className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50 hover:border-pink-500/30 transition-all duration-300 hover:transform hover:scale-105">
               <div className="text-pink-400 mb-4">{benefit.icon}</div>
               <h3 className="text-xl font-semibold mb-3 text-white">{benefit.title}</h3>
-              <p className="text-gray-300 leading-relaxed">{benefit.description}</p>
+              <p className="leading-relaxed text-[#E0E0E0]">{benefit.description}</p>
             </div>
           ))}
         </div>

@@ -21,13 +21,13 @@ const HowItWorks = () => {
     title: "Review & Publish",
     description: "Approve your post and publish directly to LinkedIn or copy manually"
   }];
-  return <section className="py-20 bg-gray-900">
+  return <section className="py-20 bg-[#1A1A1A] text-[#E0E0E0]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             How It <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Works</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-[#E0E0E0] max-w-2xl mx-auto">
             From idea to published post in just 4 simple steps
           </p>
         </div>
@@ -41,7 +41,7 @@ const HowItWorks = () => {
                 
               </div>
               <h3 className="text-xl font-semibold mb-3 text-white">{step.title}</h3>
-              <p className="text-gray-300 leading-relaxed">{step.description}</p>
+              <p className="leading-relaxed text-[#E0E0E0]">{step.description}</p>
             </div>)}
         </div>
       </div>
