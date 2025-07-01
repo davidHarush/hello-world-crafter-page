@@ -13,7 +13,7 @@ const Footer = () => {
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Join thousands of professionals who are already creating viral content with PostCrafter
             </p>
-            <Button size="lg" className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0 font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-pink-500/25 text-xl px-[32px] py-[32px]">
+            <Button size="lg" className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0 font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-pink-500/25 px-[32px] py-[24px] text-lg">
               Start Your Free Trial
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
