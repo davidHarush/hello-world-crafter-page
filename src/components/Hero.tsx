@@ -1,10 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
-
 const Hero = () => {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+  return <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.02%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%221%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
       
       <div className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32">
@@ -23,10 +20,7 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-pink-500/25"
-            >
+            <Button size="lg" className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-pink-500/25">
               Start Creating Posts
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
@@ -36,24 +30,9 @@ const Hero = () => {
             </p>
           </div>
           
-          <div className="flex items-center justify-center gap-8 text-sm text-gray-400 pt-8">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-white">10K+</div>
-              <div>Posts Generated</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-white">2K+</div>
-              <div>Happy Users</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-white">95%</div>
-              <div>Satisfaction Rate</div>
-            </div>
-          </div>
+          
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
