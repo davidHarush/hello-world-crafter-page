@@ -36,7 +36,7 @@ const Pricing = () => {
                 </ul>
               </div>
               <div className="mt-auto pt-8">
-                <Button className="w-full bg-pink-600 hover:bg-pink-500 text-white text-lg px-0 py-[16px]">Get Started</Button>
+                <Button className="w-full bg-pink-600 hover:bg-pink-500 text-white px-0 text-xl py-[24px]">Get Started</Button>
               </div>
             </div>)}
         </div>
