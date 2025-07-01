@@ -20,12 +20,12 @@ const Hero = () => {
           <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
             PostCrafter
           </div>
-          <Button 
+          <button
             onClick={handleLoginClick}
-            className="bg-[#00BFA6] hover:bg-[#00ACC1] text-white rounded-full px-6 py-2 font-medium transition-colors"
+            className="text-[#FF469D] font-medium cursor-pointer hover:underline"
           >
-            Log in with Google
-          </Button>
+            Login
+          </button>
         </div>
       </div>
 

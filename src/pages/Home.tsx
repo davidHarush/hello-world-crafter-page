@@ -44,7 +44,7 @@ const Home = () => {
           </div>
 
           {/* Primary Actions */}
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 items-stretch">
             <Card className="bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:transform hover:scale-105 flex flex-col h-full">
               <CardHeader className="text-center pb-4">
                 <PlusCircle className="w-12 h-12 text-pink-400 mx-auto mb-4" />
