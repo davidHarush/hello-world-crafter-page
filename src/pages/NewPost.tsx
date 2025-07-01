@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOut, ArrowLeft, AlertCircle } from "lucide-react";
+import { ArrowLeft, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const NewPost = () => {
@@ -22,9 +22,6 @@ const NewPost = () => {
     navigate('/home');
   };
 
-  const handleLogout = () => {
-    navigate('/');
-  };
 
   const handleGenerate = () => {
     console.log('Generating post with:', { title, description, postLength });
@@ -46,11 +43,11 @@ const NewPost = () => {
         <div className="max-w-4xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
-              <Button 
-                variant="ghost" 
-                size="sm" 
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={handleBack}
-                className="text-gray-300 hover:text-white hover:bg-gray-800"
+                className="text-[#E0E0E0] hover:text-white hover:bg-gray-800"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back
@@ -64,27 +61,18 @@ const NewPost = () => {
                 <AvatarImage src="" alt="User" />
                 <AvatarFallback className="bg-pink-500 text-white">U</AvatarFallback>
               </Avatar>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={handleLogout} 
-                className="text-gray-300 hover:text-white hover:bg-gray-800"
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                Log out
-              </Button>
             </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-2xl mx-auto px-6 py-8">
+      <main className="max-w-2xl mx-auto px-6 py-12">
         <div className="space-y-8">
           {/* Page Title */}
           <div className="text-center space-y-2">
             <h1 className="text-3xl font-bold text-white">Create New Post</h1>
-            <p className="text-gray-400">Generate engaging LinkedIn content with AI</p>
+            <p className="text-[#E0E0E0]">Generate engaging LinkedIn content with AI</p>
           </div>
 
           {/* Profile Incomplete Banner */}
@@ -106,7 +94,7 @@ const NewPost = () => {
           )}
 
           {/* Form */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             {/* Title Field */}
             <div className="space-y-2">
               <Label htmlFor="title" className="text-white font-medium">
@@ -118,9 +106,9 @@ const NewPost = () => {
                 placeholder="Post title (max 6 words)"
                 value={title}
                 onChange={handleTitleChange}
-                className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-400 rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20"
+                className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#E0E0E0] rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20"
               />
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-[#E0E0E0]">
                 {title.length}/60 characters
               </p>
             </div>
@@ -136,7 +124,7 @@ const NewPost = () => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={5}
-                className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-400 rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20 resize-none"
+                className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#E0E0E0] rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20 resize-none"
               />
             </div>
 
@@ -162,10 +150,10 @@ const NewPost = () => {
             </div>
 
             {/* Generate Button */}
-            <Button 
+            <Button
               onClick={handleGenerate}
               disabled={!title.trim() || !description.trim()}
-              className="w-full bg-[#00BFA6] hover:bg-[#00A693] text-white font-semibold rounded-lg py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-[#FF469D] to-[#FF0080] text-white font-semibold rounded-[24px] py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Generate Post
             </Button>
