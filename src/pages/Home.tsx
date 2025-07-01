@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlusCircle, History, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import AppHeader from "../components/AppHeader";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,25 +25,25 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
-      <header className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-              PostCrafter
-            </div>
-            <div className="flex items-center gap-4">
-              <Avatar className="w-10 h-10">
-                <AvatarImage src="" alt="User" />
-                <AvatarFallback className="bg-pink-500 text-white">U</AvatarFallback>
-              </Avatar>
-              <Button variant="ghost" size="sm" onClick={handleLogout} className="text-gray-300 hover:text-white hover:bg-gray-800">
-                <LogOut className="w-4 h-4 mr-2" />
-                Log out
-              </Button>
-            </div>
+      <AppHeader
+        rightContent={
+          <div className="flex items-center gap-4">
+            <Avatar className="w-10 h-10">
+              <AvatarImage src="" alt="User" />
+              <AvatarFallback className="bg-pink-500 text-white">U</AvatarFallback>
+            </Avatar>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="text-gray-300 hover:text-white hover:bg-gray-800"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Log out
+            </Button>
           </div>
-        </div>
-      </header>
+        }
+      />
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-6 py-12">
