@@ -25,9 +25,7 @@ const Hero = () => {
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             
-            <p className="text-gray-400 text-sm">
-              Sign in with Google • No credit card required
-            </p>
+            
           </div>
           
           
