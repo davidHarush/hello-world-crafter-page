@@ -44,32 +44,32 @@ const Home = () => {
           </div>
 
           {/* Primary Actions */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:transform hover:scale-105">
+          <div className="grid md:grid-cols-2 gap-6 items-stretch">
+            <Card className="bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:transform hover:scale-105 flex flex-col h-full">
               <CardHeader className="text-center pb-4">
                 <PlusCircle className="w-12 h-12 text-pink-400 mx-auto mb-4" />
                 <CardTitle className="text-2xl text-white">Create New Post</CardTitle>
               </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-300 mb-6">
+              <CardContent className="text-center flex flex-col flex-1">
+                <p className="text-gray-300 mb-6 flex-1">
                   Generate engaging LinkedIn content with AI in minutes
                 </p>
-                <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3">
+                <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3 mt-auto">
                   Start Creating
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:transform hover:scale-105">
+            <Card className="bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:transform hover:scale-105 flex flex-col h-full">
               <CardHeader className="text-center pb-4">
                 <History className="w-12 h-12 text-purple-400 mx-auto mb-4" />
                 <CardTitle className="text-2xl text-white">Posts History</CardTitle>
               </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-300 mb-6">
+              <CardContent className="text-center flex flex-col flex-1">
+                <p className="text-gray-300 mb-6 flex-1">
                   View, edit, and republish your previous posts
                 </p>
-                <Button variant="outline" className="w-full border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white rounded-full py-3">
+                <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3 mt-auto">
                   View History
                 </Button>
               </CardContent>
