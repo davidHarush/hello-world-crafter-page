@@ -1,19 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlusCircle, History, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
 const Home = () => {
   const navigate = useNavigate();
-
   const handleLogout = () => {
     navigate('/');
   };
-
-  return (
-    <div className="min-h-screen bg-gray-900 text-white">
+  return <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
       <header className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -26,12 +21,7 @@ const Home = () => {
                 <AvatarImage src="" alt="User" />
                 <AvatarFallback className="bg-pink-500 text-white">U</AvatarFallback>
               </Avatar>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={handleLogout}
-                className="text-gray-300 hover:text-white hover:bg-gray-800"
-              >
+              <Button variant="ghost" size="sm" onClick={handleLogout} className="text-gray-300 hover:text-white hover:bg-gray-800">
                 <LogOut className="w-4 h-4 mr-2" />
                 Log out
               </Button>
@@ -87,24 +77,9 @@ const Home = () => {
           </div>
 
           {/* Subscription Status */}
-          <Card className="bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/20">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-1">Current Plan</h3>
-                  <p className="text-pink-400 text-sm">Pro Plan – Unlimited posts</p>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold text-white">∞</div>
-                  <p className="text-gray-400 text-sm">Posts remaining</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Home;
