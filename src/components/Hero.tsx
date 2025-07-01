@@ -1,10 +1,35 @@
+
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 const Hero = () => {
-  return <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate('/home');
+  };
+
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.02%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%221%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
       
-      <div className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32">
+      {/* Header with Login Button */}
+      <div className="relative max-w-7xl mx-auto px-6 py-6">
+        <div className="flex justify-between items-center">
+          <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+            PostCrafter
+          </div>
+          <Button 
+            onClick={handleLoginClick}
+            className="bg-[#00BFA6] hover:bg-[#00ACC1] text-white rounded-full px-6 py-2 font-medium transition-colors"
+          >
+            Log in with Google
+          </Button>
+        </div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6 py-12 lg:py-20">
         <div className="text-center space-y-8">
           <div className="inline-flex items-center gap-2 bg-pink-500/10 border border-pink-500/20 rounded-full px-4 py-2 text-pink-400 text-sm font-medium">
             <Sparkles className="w-4 h-4" />
@@ -24,13 +49,11 @@ const Hero = () => {
               Start Creating Posts
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-            
-            
           </div>
-          
-          
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;
