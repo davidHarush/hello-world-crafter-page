@@ -31,13 +31,11 @@ const Pricing = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-900 text-white">
+    <section className="py-20 bg-[#0D0F1A] text-white">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-            Simple,
-            <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent"> Transparent</span>
-            Pricing
+            Simple, <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Transparent</span> Pricing
           </h2>
           <p className="text-lg text-gray-400">Choose the plan that fits your content creation needs</p>
         </div>
@@ -45,11 +43,12 @@ const Pricing = () => {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`flex h-full flex-col rounded-2xl border p-8 shadow-md bg-[#1A1A1A] ${plan.highlight ? 'border-pink-500/40' : 'border-gray-700/40'}`}
+              className={`flex h-full flex-col rounded-2xl border p-8 shadow-md bg-[#2A2A2A] ${plan.highlight ? 'border-pink-500/60 shadow-pink-500/20' : 'border-gray-700/40'}`}
             >
               <div>
                 <h3 className="text-2xl font-semibold mb-1">{plan.name}</h3>
-                <p className="text-gray-400 mb-6">{plan.subtitle}</p>
+                <p className="text-gray-400 mb-4">{plan.subtitle}</p>
+                <div className="text-4xl font-bold text-center mb-6">{plan.price}</div>
                 <ul className="space-y-4">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
@@ -60,7 +59,6 @@ const Pricing = () => {
                 </ul>
               </div>
               <div className="mt-auto pt-8">
-                <div className="text-4xl font-bold mb-4">{plan.price}</div>
                 <Button className="w-full bg-pink-600 hover:bg-pink-500 text-white">Get Started</Button>
               </div>
             </div>
