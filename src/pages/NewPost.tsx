@@ -18,6 +18,8 @@ const NewPost = () => {
   const [description, setDescription] = useState('');
   const [postLength, setPostLength] = useState('5');
   const [isGenerating, setIsGenerating] = useState(false);
+  const [audience, setAudience] = useState('General');
+  const [tone, setTone] = useState('Professional');
   
   // Mock profile completeness check - in real app this would come from user data
   const isProfileIncomplete = true;
@@ -50,7 +52,9 @@ const handleGenerate = async () => {
         userId: "11111111-1111-1111-1111-111111111111",
         title: title.trim(),
         description: description.trim(),
-        length: parseInt(postLength)
+        length: parseInt(postLength),
+        audience, 
+        tone 
       })
     });
 
@@ -202,6 +206,43 @@ const handleGenerate = async () => {
                 </SelectContent>
               </Select>
             </div>
+            
+            {/* Audience Selector */}
+            <div className="space-y-2">
+              <Label htmlFor="audience" className="text-white font-medium">
+                Audience
+              </Label>
+              <Select value={audience} onValueChange={setAudience}>
+                <SelectTrigger className="bg-gray-800/50 border-gray-700 text-white rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20">
+                  <SelectValue placeholder="Select audience" />
+                </SelectTrigger>
+                <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                  <SelectItem value="General">General</SelectItem>
+                  <SelectItem value="Tech Professionals">Tech Professionals</SelectItem>
+                  <SelectItem value="Marketing">Marketing</SelectItem>
+                  <SelectItem value="Founders">Founders</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            {/* Tone Selector */}
+            <div className="space-y-2">
+              <Label htmlFor="tone" className="text-white font-medium">
+                Tone
+              </Label>
+              <Select value={tone} onValueChange={setTone}>
+                <SelectTrigger className="bg-gray-800/50 border-gray-700 text-white rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20">
+                  <SelectValue placeholder="Select tone" />
+                </SelectTrigger>
+                <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                  <SelectItem value="Professional">Professional</SelectItem>
+                  <SelectItem value="Casual">Casual</SelectItem>
+                  <SelectItem value="Inspiring">Inspiring</SelectItem>
+                  <SelectItem value="Funny">Funny</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
 
             {/* Generate Button */}
             <Button
