@@ -6,14 +6,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ArrowLeft, AlertCircle } from "lucide-react";
+import { ArrowLeft, AlertCircle, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const NewPost = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [postLength, setPostLength] = useState('5');
+  const [isGenerating, setIsGenerating] = useState(false);
   
   // Mock profile completeness check - in real app this would come from user data
   const isProfileIncomplete = true;
@@ -22,11 +26,63 @@ const NewPost = () => {
     navigate('/home');
   };
 
+  const handleGenerate = async () => {
+    if (!title.trim() || !description.trim()) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in both title and description fields.",
+        variant: "destructive"
+      });
+      return;
+    }
 
+    setIsGenerating(true);
+    
+    try {
+      console.log('Generating post with:', { title, description, postLength });
+      
+      // Get current user
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      
+      if (userError || !user) {
+        throw new Error('User not authenticated');
+      }
 
-  const handleGenerate = () => {
-    console.log('Generating post with:', { title, description, postLength });
-    // TODO: Implement post generation logic
+      // Call the Edge Function
+      const { data, error } = await supabase.functions.invoke('generate-post', {
+        body: {
+          userId: user.id,
+          title: title.trim(),
+          description: description.trim(),
+          length: parseInt(postLength)
+        }
+      });
+
+      if (error) {
+        console.error('Edge function error:', error);
+        throw new Error(error.message || 'Failed to generate post');
+      }
+
+      console.log('Generated post:', data);
+      
+      toast({
+        title: "Post Generated Successfully!",
+        description: "Your LinkedIn post has been created and saved.",
+      });
+
+      // TODO: Navigate to post preview/edit page
+      // navigate(`/post/${data.id}`);
+      
+    } catch (error) {
+      console.error('Error generating post:', error);
+      toast({
+        title: "Generation Failed",
+        description: error.message || "Failed to generate post. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,10 +209,17 @@ const NewPost = () => {
             {/* Generate Button */}
             <Button
               onClick={handleGenerate}
-              disabled={!title.trim() || !description.trim()}
+              disabled={!title.trim() || !description.trim() || isGenerating}
               className="w-full bg-gradient-to-r from-[#FF469D] to-[#FF0080] text-white font-semibold rounded-[24px] py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Generate Post
+              {isGenerating ? (
+                <>
+                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  Generating Post...
+                </>
+              ) : (
+                'Generate Post'
+              )}
             </Button>
           </div>
         </div>
