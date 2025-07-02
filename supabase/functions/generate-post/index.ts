@@ -29,12 +29,17 @@ serve(async (req) => {
     // Extract the token from Bearer token
     const token = authHeader.replace('Bearer ', '');
     
-    // Create Supabase client with the user's access token
+    // Create Supabase client with the anon key, then set the session
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const supabase = createClient(supabaseUrl, token);
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
+    const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+      global: {
+        headers: { Authorization: authHeader },
+      },
+    });
 
-    // Verify the user's session
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    // Verify the user's session using the token
+    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
     
     if (authError || !user) {
       console.error('Auth verification failed:', authError);
