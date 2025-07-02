@@ -25,67 +25,62 @@ const NewPost = () => {
   const handleBack = () => {
     navigate('/home');
   };
+const handleGenerate = async () => {
+  if (!title.trim() || !description.trim()) {
+    toast({
+      title: "Missing Information",
+      description: "Please fill in both title and description fields.",
+      variant: "destructive"
+    });
+    return;
+  }
 
-  const handleGenerate = async () => {
-    if (!title.trim() || !description.trim()) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in both title and description fields.",
-        variant: "destructive"
-      });
-      return;
+  setIsGenerating(true);
+
+  try {
+    console.log('Generating post with:', { title, description, postLength });
+
+    const response = await fetch("https://zgjiibivucwjtzjelcde.supabase.co/functions/v1/generate-post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}` // או כל טוקן תקף
+      },
+      body: JSON.stringify({
+        userId: "11111111-1111-1111-1111-111111111111",
+        title: title.trim(),
+        description: description.trim(),
+        length: parseInt(postLength)
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to generate post');
     }
 
-    setIsGenerating(true);
-    
-    try {
-      console.log('Generating post with:', { title, description, postLength });
-      
-      // // Get current user
-      // const { data: { user }, error: userError } = await supabase.auth.getUser();
-      
-      // if (userError || !user) {
-      //   throw new Error('User not authenticated');
-      // }
-const tempUserId = "11111111-1111-1111-1111-111111111111"; // fallback default
+    const data = await response.json();
+    console.log('Generated post:', data);
 
-      // Call the Edge Function
-      const { data, error } = await supabase.functions.invoke('generate-post', {
-        body: {
-          // userId: user.id,
-          userId: tempUserId,
-          title: title.trim(),
-          description: description.trim(),
-          length: parseInt(postLength)
-        }
-      });
+    toast({
+      title: "Post Generated Successfully!",
+      description: "Your LinkedIn post has been created and saved.",
+    });
 
-      if (error) {
-        console.error('Edge function error:', error);
-        throw new Error(error.message || 'Failed to generate post');
-      }
+    // Optional navigation
+    // navigate(`/post/${data.id}`);
 
-      console.log('Generated post:', data);
-      
-      toast({
-        title: "Post Generated Successfully!",
-        description: "Your LinkedIn post has been created and saved.",
-      });
-
-      // TODO: Navigate to post preview/edit page
-      // navigate(`/post/${data.id}`);
-      
-    } catch (error) {
-      console.error('Error generating post:', error);
-      toast({
-        title: "Generation Failed",
-        description: error.message || "Failed to generate post. Please try again.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsGenerating(false);
-    }
-  };
+  } catch (error) {
+    console.error('Error generating post:', error);
+    toast({
+      title: "Generation Failed",
+      description: error.message || "Failed to generate post. Please try again.",
+      variant: "destructive"
+    });
+  } finally {
+    setIsGenerating(false);
+  }
+};
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
