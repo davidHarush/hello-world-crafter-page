@@ -46,7 +46,7 @@ const handleGenerate = async () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}` // או כל טוקן תקף
+        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnamlpYml2dWN3anR6amVsY2RlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MjU2MTEsImV4cCI6MjA2NjUwMTYxMX0.kxunwr8SvRTup1DaSbqEn4fD4cdY9WHCch2SdtBch_o` // או כל טוקן תקף
       },
       body: JSON.stringify({
         userId: "11111111-1111-1111-1111-111111111111",
