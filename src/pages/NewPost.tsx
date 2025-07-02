@@ -23,10 +23,29 @@ const NewPost = () => {
   };
 
 
-  const handleGenerate = () => {
-    console.log('Generating post with:', { title, description, postLength });
-    // TODO: Implement post generation logic
-  };
+  const handleGenerate = async () => {
+  const res = await fetch("https://zgjiibivucwjtzjelcde.functions.supabase.co/generate-post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnamlpYml2dWN3anR6amVsY2RlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MjU2MTEsImV4cCI6MjA2NjUwMTYxMX0.kxunwr8SvRTup1DaSbqEn4fD4cdY9WHCch2SdtBch_o"
+    },
+    body: JSON.stringify({
+      userId: "11111111-1111-1111-1111-111111111111", // תוכל לשלוף את זה מה־auth אם יש
+      title,
+      description,
+      audience: "מובילי דעה בתחומים מקצועיים",
+      tone: "ישיר וערכי",
+      length: parseInt(postLength),
+    }),
+  });
+
+  const data = await res.json();
+  console.log("Response:", data);
+
+  // אפשר להוסיף redirect או לשמור את התוצאה ב־state
+};
+
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
