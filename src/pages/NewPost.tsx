@@ -56,6 +56,8 @@ const NewPost = () => {
     try {
       console.log('Generating post with:', { title, description, postLength, audience, tone });
       console.log('User ID:', user.id);
+      console.log("Access token:", session.access_token); 
+      
 
       const response = await fetch("https://zgjiibivucwjtzjelcde.supabase.co/functions/v1/generate-post", {
         method: "POST",
