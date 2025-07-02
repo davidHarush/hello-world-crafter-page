@@ -15,12 +15,55 @@ serve(async (req) => {
   }
 
   try {
-    const { userId, title, description, length } = await req.json();
+    // Get the authorization header
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader) {
+      return new Response(JSON.stringify({ 
+        error: 'Authorization header missing' 
+      }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Extract the token from Bearer token
+    const token = authHeader.replace('Bearer ', '');
     
+    // Create Supabase client with the user's access token
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const supabase = createClient(supabaseUrl, token);
+
+    // Verify the user's session
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    
+    if (authError || !user) {
+      console.error('Auth verification failed:', authError);
+      return new Response(JSON.stringify({ 
+        error: 'Invalid or expired session' 
+      }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const { userId, title, description, length, audience, tone } = await req.json();
+    
+    // Verify the userId matches the authenticated user
+    if (userId !== user.id) {
+      return new Response(JSON.stringify({ 
+        error: 'User ID mismatch' 
+      }), {
+        status: 403,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     console.log('Generating post for user:', userId);
     console.log('Title:', title);
     console.log('Description:', description);
     console.log('Length:', length);
+    console.log('Audience:', audience);
+    console.log('Tone:', tone);
 
     // Create a mock response for now (you can integrate with OpenAI later)
     const generatedPost = {
@@ -29,13 +72,12 @@ serve(async (req) => {
       "Hashtags": ["#LinkedIn", "#Professional", "#Success", "#Growth", "#Business"]
     };
 
-    // Initialize Supabase client
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    // Use service role key for database operations
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 
     // Save the generated post to the database
-    const { data: savedPost, error: saveError } = await supabase
+    const { data: savedPost, error: saveError } = await supabaseAdmin
       .from('posts')
       .insert({
         user_id: userId,

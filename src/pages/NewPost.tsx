@@ -10,10 +10,12 @@ import { ArrowLeft, AlertCircle, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 const NewPost = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user, session } = useAuth();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [postLength, setPostLength] = useState('5');
@@ -27,64 +29,89 @@ const NewPost = () => {
   const handleBack = () => {
     navigate('/home');
   };
-const handleGenerate = async () => {
-  if (!title.trim() || !description.trim()) {
-    toast({
-      title: "Missing Information",
-      description: "Please fill in both title and description fields.",
-      variant: "destructive"
-    });
-    return;
-  }
 
-  setIsGenerating(true);
-
-  try {
-    console.log('Generating post with:', { title, description, postLength });
-
-    const response = await fetch("https://zgjiibivucwjtzjelcde.supabase.co/functions/v1/generate-post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnamlpYml2dWN3anR6amVsY2RlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MjU2MTEsImV4cCI6MjA2NjUwMTYxMX0.kxunwr8SvRTup1DaSbqEn4fD4cdY9WHCch2SdtBch_o` // או כל טוקן תקף
-      },
-      body: JSON.stringify({
-        userId: "11111111-1111-1111-1111-111111111111",
-        title: title.trim(),
-        description: description.trim(),
-        length: parseInt(postLength),
-        audience, 
-        tone 
-      })
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Failed to generate post');
+  const handleGenerate = async () => {
+    if (!title.trim() || !description.trim()) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in both title and description fields.",
+        variant: "destructive"
+      });
+      return;
     }
 
-    const data = await response.json();
-    console.log('Generated post:', data);
+    // Check if user is authenticated
+    if (!session || !user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to generate posts.",
+        variant: "destructive"
+      });
+      navigate('/');
+      return;
+    }
 
-    toast({
-      title: "Post Generated Successfully!",
-      description: "Your LinkedIn post has been created and saved.",
-    });
+    setIsGenerating(true);
 
-    // Optional navigation
-    // navigate(`/post/${data.id}`);
+    try {
+      console.log('Generating post with:', { title, description, postLength, audience, tone });
+      console.log('User ID:', user.id);
 
-  } catch (error) {
-    console.error('Error generating post:', error);
-    toast({
-      title: "Generation Failed",
-      description: error.message || "Failed to generate post. Please try again.",
-      variant: "destructive"
-    });
-  } finally {
-    setIsGenerating(false);
-  }
-};
+      const response = await fetch("https://zgjiibivucwjtzjelcde.supabase.co/functions/v1/generate-post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${session.access_token}`
+        },
+        body: JSON.stringify({
+          userId: user.id,
+          title: title.trim(),
+          description: description.trim(),
+          length: parseInt(postLength),
+          audience, 
+          tone 
+        })
+      });
+
+      if (!response.ok) {
+        // Handle authentication errors
+        if (response.status === 401 || response.status === 403) {
+          toast({
+            title: "Authentication Error",
+            description: "Your session has expired. Please log in again.",
+            variant: "destructive"
+          });
+          await supabase.auth.signOut();
+          navigate('/');
+          return;
+        }
+
+        const errorData = await response.json();
+        throw new Error(errorData.error || `Server error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Generated post:', data);
+
+      toast({
+        title: "Post Generated Successfully!",
+        description: "Your LinkedIn post has been created and saved.",
+      });
+
+      // Optional navigation to post preview
+      // navigate(`/post/${data.id}`);
+
+    } catch (error) {
+      console.error('Error generating post:', error);
+      toast({
+        title: "Generation Failed",
+        description: error.message || "Failed to generate post. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -116,8 +143,10 @@ const handleGenerate = async () => {
             </div>
             <div className="flex items-center gap-4">
               <Avatar className="w-10 h-10">
-                <AvatarImage src="" alt="User" />
-                <AvatarFallback className="bg-pink-500 text-white">U</AvatarFallback>
+                <AvatarImage src={user?.user_metadata?.avatar_url || ""} alt={user?.user_metadata?.full_name || "User"} />
+                <AvatarFallback className="bg-pink-500 text-white">
+                  {user?.user_metadata?.full_name?.[0] || user?.email?.[0]?.toUpperCase() || 'U'}
+                </AvatarFallback>
               </Avatar>
             </div>
           </div>
@@ -242,7 +271,6 @@ const handleGenerate = async () => {
                 </SelectContent>
               </Select>
             </div>
-
 
             {/* Generate Button */}
             <Button
