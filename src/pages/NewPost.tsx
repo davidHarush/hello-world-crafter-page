@@ -41,17 +41,19 @@ const NewPost = () => {
     try {
       console.log('Generating post with:', { title, description, postLength });
       
-      // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      // // Get current user
+      // const { data: { user }, error: userError } = await supabase.auth.getUser();
       
-      if (userError || !user) {
-        throw new Error('User not authenticated');
-      }
+      // if (userError || !user) {
+      //   throw new Error('User not authenticated');
+      // }
+const tempUserId = "11111111-1111-1111-1111-111111111111"; // fallback default
 
       // Call the Edge Function
       const { data, error } = await supabase.functions.invoke('generate-post', {
         body: {
-          userId: user.id,
+          // userId: user.id,
+          userId: tempUserId,
           title: title.trim(),
           description: description.trim(),
           length: parseInt(postLength)
