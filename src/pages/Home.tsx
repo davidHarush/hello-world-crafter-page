@@ -4,12 +4,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlusCircle, History, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   
-  const handleLogout = () => {
-    navigate('/');
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
   };
 
   const handleCreatePost = () => {
@@ -32,8 +39,10 @@ const Home = () => {
             </div>
             <div className="flex items-center gap-4">
               <Avatar className="w-10 h-10">
-                <AvatarImage src="" alt="User" />
-                <AvatarFallback className="bg-pink-500 text-white">U</AvatarFallback>
+                <AvatarImage src={user?.user_metadata?.avatar_url || ""} alt={user?.user_metadata?.full_name || "User"} />
+                <AvatarFallback className="bg-pink-500 text-white">
+                  {user?.user_metadata?.full_name?.[0] || user?.email?.[0]?.toUpperCase() || 'U'}
+                </AvatarFallback>
               </Avatar>
               <Button variant="ghost" size="sm" onClick={handleLogout} className="text-gray-300 hover:text-white hover:bg-gray-800">
                 <LogOut className="w-4 h-4 mr-2" />
@@ -50,7 +59,7 @@ const Home = () => {
           {/* Welcome Section */}
           <div className="text-center space-y-4">
             <h1 className="text-4xl lg:text-5xl font-bold">
-              Welcome back!
+              Welcome back{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name.split(' ')[0]}` : ''}!
             </h1>
             <p className="text-xl text-gray-300">
               Ready to create your next viral LinkedIn post?
@@ -95,9 +104,6 @@ const Home = () => {
               </CardContent>
             </Card>
           </div>
-
-          {/* Subscription Status */}
-          
         </div>
       </main>
     </div>

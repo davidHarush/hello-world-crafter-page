@@ -1,14 +1,44 @@
 
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Hero = () => {
+  const { user, loading, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
-  const handleLoginClick = () => {
-    navigate('/home');
+  // Redirect to home if user is already logged in
+  useEffect(() => {
+    if (!loading && user) {
+      navigate('/home');
+    }
+  }, [user, loading, navigate]);
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
+
+  const handleLoginClick = () => {
+    if (user) {
+      navigate('/home');
+    } else {
+      handleGoogleLogin();
+    }
+  };
+
+  if (loading) {
+    return (
+      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-screen flex items-center justify-center">
+        <div className="text-white text-lg">Loading...</div>
+      </section>
+    );
+  }
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
@@ -24,7 +54,7 @@ const Hero = () => {
             onClick={handleLoginClick}
             className="text-[#FF469D] font-medium cursor-pointer hover:underline"
           >
-            Login
+            {user ? 'Go to Dashboard' : 'Login'}
           </button>
         </div>
       </div>
@@ -45,8 +75,12 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0 font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-pink-500/25 px-[32px] py-[32px] text-3xl">
-              Start Creating Posts
+            <Button 
+              size="lg" 
+              onClick={handleGoogleLogin}
+              className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0 font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-pink-500/25 px-[32px] py-[32px] text-3xl"
+            >
+              Continue with Google
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
