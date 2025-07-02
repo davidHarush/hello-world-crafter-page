@@ -76,15 +76,18 @@ const NewPost = () => {
       if (!response.ok) {
         // Handle authentication errors
         if (response.status === 401 || response.status === 403) {
+          const errorData = await response.json();
           toast({
             title: "Authentication Error",
-            description: "Your session has expired. Please log in again.",
+            description: errorData.error || "Your session has expired. Please log in again.",
             variant: "destructive"
           });
+          console.error("Auth error:", errorData);
           await supabase.auth.signOut();
           navigate('/');
           return;
         }
+
 
         const errorData = await response.json();
         throw new Error(errorData.error || `Server error: ${response.status}`);
