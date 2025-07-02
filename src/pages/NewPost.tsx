@@ -63,7 +63,9 @@ const NewPost = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${session.access_token}`
+          "Authorization": `Bearer ${session.access_token}`,
+          "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnamlpYml2dWN3anR6amVsY2RlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MjU2MTEsImV4cCI6MjA2NjUwMTYxMX0.kxunwr8SvRTup1DaSbqEn4fD4cdY9WHCch2SdtBch_o"
+
         },
         body: JSON.stringify({
           userId: user.id,
