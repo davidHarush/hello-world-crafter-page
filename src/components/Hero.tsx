@@ -9,10 +9,11 @@ const Hero = () => {
   const { user, loading, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
-  // Redirect to home if user is already logged in
+  // Redirect to dashboard if user is already logged in
   useEffect(() => {
     if (!loading && user) {
-      navigate('/home');
+      // navigate('/home');
+      navigate('/dashboard');
     }
   }, [user, loading, navigate]);
 
@@ -26,7 +27,8 @@ const Hero = () => {
 
   const handleLoginClick = () => {
     if (user) {
-      navigate('/home');
+      // navigate('/home');
+      navigate('/dashboard');
     } else {
       handleGoogleLogin();
     }
