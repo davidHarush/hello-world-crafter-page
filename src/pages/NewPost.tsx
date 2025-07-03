@@ -191,16 +191,15 @@ const NewPost = () => {
               <Textarea id="description" placeholder="Describe what the post should say" value={description} onChange={e => setDescription(e.target.value)} rows={5} className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#E0E0E0] rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20 resize-none" />
             </div>
 
-            {/* Post Length Selector */}
-            <div className="space-y-2">
-              <Label htmlFor="post-length" className="text-white font-medium">
-                Post Length
-              </Label>
-              <Select value={postLength} onValueChange={setPostLength}>
-                <SelectTrigger className="bg-gray-800/50 border-gray-700 text-white rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20">
-                  <SelectValue placeholder="Select post length" />
-                </SelectTrigger>
-                <SelectContent className="bg-gray-800 border-gray-700 text-white">
+{/* Post Length, Audience, and Tone - in one row */}
+<div className="flex flex-col lg:flex-row gap-4">
+  <div className="flex-1 space-y-2">
+    <Label htmlFor="post-length" className="text-white font-medium">Post Length</Label>
+    <Select value={postLength} onValueChange={setPostLength}>
+      <SelectTrigger className="bg-gray-800/50 border-gray-700 text-white rounded-lg">
+        <SelectValue placeholder="Select post length" />
+      </SelectTrigger>
+       <SelectContent className="bg-gray-800 border-gray-700 text-white">
                   <SelectItem value="4">4 paragraphs</SelectItem>
                   <SelectItem value="5">5 paragraphs</SelectItem>
                   <SelectItem value="6">6 paragraphs</SelectItem>
@@ -209,45 +208,39 @@ const NewPost = () => {
                   <SelectItem value="9">9 paragraphs</SelectItem>
                   <SelectItem value="10">10 paragraphs</SelectItem>
                 </SelectContent>
-              </Select>
-            </div>
-            
-            {/* Audience Selector */}
-            <div className="space-y-2">
-              <Label htmlFor="audience" className="text-white font-medium">
-                Audience
-              </Label>
-              <Select value={audience} onValueChange={setAudience}>
-                <SelectTrigger className="bg-gray-800/50 border-gray-700 text-white rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20">
-                  <SelectValue placeholder="Select audience" />
-                </SelectTrigger>
-                <SelectContent className="bg-gray-800 border-gray-700 text-white">
+    </Select>
+  </div>
+
+  <div className="flex-1 space-y-2">
+    <Label htmlFor="audience" className="text-white font-medium">Audience</Label>
+    <Select value={audience} onValueChange={setAudience}>
+      <SelectTrigger className="bg-gray-800/50 border-gray-700 text-white rounded-lg">
+        <SelectValue placeholder="Select audience" />
+      </SelectTrigger>
+      <SelectContent className="bg-gray-800 border-gray-700 text-white">
                   <SelectItem value="General">General</SelectItem>
                   <SelectItem value="Tech Professionals">Tech Professionals</SelectItem>
                   <SelectItem value="Marketing">Marketing</SelectItem>
                   <SelectItem value="Founders">Founders</SelectItem>
                 </SelectContent>
-              </Select>
-            </div>
-            
-            {/* Tone Selector */}
-            <div className="space-y-2">
-              <Label htmlFor="tone" className="text-white font-medium">
-                Tone
-              </Label>
-              <Select value={tone} onValueChange={setTone}>
-                <SelectTrigger className="bg-gray-800/50 border-gray-700 text-white rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20">
-                  <SelectValue placeholder="Select tone" />
-                </SelectTrigger>
-                <SelectContent className="bg-gray-800 border-gray-700 text-white">
+    </Select>
+  </div>
+
+  <div className="flex-1 space-y-2">
+    <Label htmlFor="tone" className="text-white font-medium">Tone</Label>
+    <Select value={tone} onValueChange={setTone}>
+      <SelectTrigger className="bg-gray-800/50 border-gray-700 text-white rounded-lg">
+        <SelectValue placeholder="Select tone" />
+      </SelectTrigger>
+       <SelectContent className="bg-gray-800 border-gray-700 text-white">
                   <SelectItem value="Professional">Professional</SelectItem>
                   <SelectItem value="Casual">Casual</SelectItem>
                   <SelectItem value="Inspiring">Inspiring</SelectItem>
                   <SelectItem value="Funny">Funny</SelectItem>
                 </SelectContent>
-              </Select>
-            </div>
-
+    </Select>
+  </div>
+</div>            
             {/* Generate Button */}
             <Button onClick={handleGenerate} disabled={!title.trim() || !description.trim() || isGenerating} className="w-full bg-gradient-to-r from-[#FF469D] to-[#FF0080] text-white font-semibold rounded-[24px] py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed">
               {isGenerating ? <>
