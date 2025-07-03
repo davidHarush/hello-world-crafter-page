@@ -177,7 +177,7 @@ const NewPost = () => {
               <Label htmlFor="title" className="text-white font-medium">
                 Post Title
               </Label>
-              <Input id="title" type="text" placeholder="Post title (max 6 words)" value={title} onChange={handleTitleChange} className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#E0E0E0] rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20" />
+              <Input id="title" type="text" placeholder="E.g. 'The One Mistake I Keep Seeing in Startups'" value={title} onChange={handleTitleChange} className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#E0E0E0] rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20" />
               <p className="text-xs text-[#E0E0E0]">
                 {title.length}/60 characters
               </p>
@@ -188,7 +188,7 @@ const NewPost = () => {
               <Label htmlFor="description" className="text-white font-medium">
                 Description
               </Label>
-              <Textarea id="description" placeholder="Describe what the post should say" value={description} onChange={e => setDescription(e.target.value)} rows={5} className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#E0E0E0] rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20 resize-none" />
+              <Textarea id="description" placeholder="What should the post talk about? (e.g. tips, personal story, insight...)" value={description} onChange={e => setDescription(e.target.value)} rows={5} className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#E0E0E0] rounded-lg focus:border-pink-500/30 focus:ring-pink-500/20 resize-none" />
             </div>
 
 {/* Post Length, Audience, and Tone - in one row */}
