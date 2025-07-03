@@ -27,7 +27,7 @@ const NewPost = () => {
   const isProfileIncomplete = true;
 
   const handleBack = () => {
-    navigate('/home');
+    navigate('/dashboard');
   };
 
   const handleGenerate = async () => {
