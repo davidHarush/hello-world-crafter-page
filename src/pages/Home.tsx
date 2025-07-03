@@ -181,7 +181,7 @@ const Home = () => {
                 <p className="text-gray-300 mb-6">
                   Generate engaging LinkedIn content with AI in minutes
                 </p>
-                <Button onClick={handleCreatePost} className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3">
+                <Button onClick={handleCreatePost} className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full text-lg py-[16px]">
                   Start Creating
                 </Button>
               </CardContent>
@@ -197,7 +197,7 @@ const Home = () => {
                 <p className="text-gray-300 mb-6">
                   View, edit, and republish your previous posts
                 </p>
-                <Button onClick={handleViewHistory} className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3">
+                <Button onClick={handleViewHistory} className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-[16px] text-xl">
                   View History
                 </Button>
               </CardContent>
