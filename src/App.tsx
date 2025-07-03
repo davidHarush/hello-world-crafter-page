@@ -38,6 +38,11 @@ const App = () => (
                 <NewPost />
               </ProtectedRoute>
             } />
+            <Route path="/create" element={
+              <ProtectedRoute>
+                <NewPost />
+              </ProtectedRoute>
+            } />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
