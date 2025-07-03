@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import DashboardStats from "@/components/DashboardStats";
+import QuickActions from "@/components/QuickActions";
+import RecentPosts from "@/components/RecentPosts";
 import DailyTip from "@/components/DailyTip";
-import CreatePostCard from "@/components/dashboard/CreatePostCard";
-import PostHistory from "@/components/dashboard/PostHistory";
-import ProfileCard from "@/components/dashboard/ProfileCard";
+import ProfileStatus from "@/components/ProfileStatus";
 
 const Dashboard = () => {
   const { user, signOut, loading } = useAuth();
@@ -39,6 +40,14 @@ const Dashboard = () => {
   if (!user) {
     return null;
   }
+
+  // Mock data - in a real app, this would come from API/database
+  const dashboardData = {
+    postsThisMonth: 8,
+    engagementRate: 4.2,
+    totalViews: 12500,
+    scheduledPosts: 3
+  };
 
   return (
     <div className="min-h-screen bg-[#1A1A1A] text-[#E0E0E0]">
@@ -75,13 +84,20 @@ const Dashboard = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <CreatePostCard />
-              <PostHistory />
+          {/* Stats Overview */}
+          <DashboardStats {...dashboardData} />
+
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Left Column - Main Content */}
+            <div className="lg:col-span-2 space-y-6">
+              <QuickActions />
+              <RecentPosts />
             </div>
+
+            {/* Right Column - Sidebar */}
             <div className="space-y-6">
-              <ProfileCard />
+              <ProfileStatus />
               <DailyTip />
             </div>
           </div>
