@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,34 +6,31 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-
 interface ProfileData {
   linkedin_connected: boolean;
   subscription_plan: string;
   subscription_status: string;
 }
-
 const Home = () => {
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
+  const {
+    user,
+    signOut
+  } = useAuth();
   const [profileData, setProfileData] = useState<ProfileData>({
     linkedin_connected: false,
     subscription_plan: 'free',
     subscription_status: 'active'
   });
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchProfile = async () => {
       if (!user) return;
-      
       try {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('linkedin_connected, subscription_plan, subscription_status')
-          .eq('id', user.id)
-          .single();
-
+        const {
+          data,
+          error
+        } = await supabase.from('profiles').select('linkedin_connected, subscription_plan, subscription_status').eq('id', user.id).single();
         if (error) {
           console.error('Error fetching profile:', error);
         } else if (data) {
@@ -50,10 +46,8 @@ const Home = () => {
         setLoading(false);
       }
     };
-
     fetchProfile();
   }, [user]);
-  
   const handleLogout = async () => {
     try {
       await signOut();
@@ -62,21 +56,17 @@ const Home = () => {
       console.error('Logout failed:', error);
     }
   };
-
   const handleCreatePost = () => {
     navigate('/new-post');
   };
-
   const handleViewHistory = () => {
     // TODO: Navigate to history page when implemented
     console.log('Navigate to history page');
   };
-
   const handleProfileClick = () => {
     // TODO: Navigate to edit profile page when it's built
     console.log('Navigate to edit profile - TODO');
   };
-
   const getPlanDisplayName = (plan: string) => {
     switch (plan.toLowerCase()) {
       case 'pro':
@@ -87,7 +77,6 @@ const Home = () => {
         return 'Free';
     }
   };
-
   const getPlanColor = (plan: string) => {
     switch (plan.toLowerCase()) {
       case 'pro':
@@ -98,9 +87,7 @@ const Home = () => {
         return 'text-gray-400';
     }
   };
-
-  return (
-    <div className="min-h-screen bg-gray-900 text-white">
+  return <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
       <header className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -110,7 +97,7 @@ const Home = () => {
             </div>
             <div className="flex items-center gap-4">
               <Avatar className="w-10 h-10">
-                <AvatarImage src={user?.user_metadata?.avatar_url || ""} alt={user?.user_metadata?.full_name || "User"} />
+                
                 <AvatarFallback className="bg-pink-500 text-white">
                   {user?.user_metadata?.full_name?.[0] || user?.email?.[0]?.toUpperCase() || 'U'}
                 </AvatarFallback>
@@ -140,19 +127,13 @@ const Home = () => {
           {/* Single Column Layout */}
           <div className="space-y-6">
             {/* Profile Card */}
-            <Card 
-              className="bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:transform hover:scale-105 cursor-pointer"
-              onClick={handleProfileClick}
-            >
+            <Card className="bg-gray-800/50 border-gray-700 hover:border-pink-500/30 transition-all duration-300 hover:transform hover:scale-105 cursor-pointer" onClick={handleProfileClick}>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     {/* User Avatar */}
                     <Avatar className="w-16 h-16">
-                      <AvatarImage 
-                        src={user?.user_metadata?.avatar_url || ""} 
-                        alt={user?.user_metadata?.full_name || "User"} 
-                      />
+                      <AvatarImage src={user?.user_metadata?.avatar_url || ""} alt={user?.user_metadata?.full_name || "User"} />
                       <AvatarFallback className="bg-pink-500 text-white text-lg">
                         {user?.user_metadata?.full_name?.[0] || user?.email?.[0]?.toUpperCase() || 'U'}
                       </AvatarFallback>
@@ -169,11 +150,7 @@ const Home = () => {
                       <div className="flex items-center gap-4 mt-2">
                         {/* LinkedIn Status */}
                         <div className="flex items-center gap-1">
-                          {profileData.linkedin_connected ? (
-                            <CheckCircle className="h-4 w-4 text-green-400" />
-                          ) : (
-                            <AlertCircle className="h-4 w-4 text-amber-400" />
-                          )}
+                          {profileData.linkedin_connected ? <CheckCircle className="h-4 w-4 text-green-400" /> : <AlertCircle className="h-4 w-4 text-amber-400" />}
                           <span className="text-xs text-gray-300">
                             LinkedIn {profileData.linkedin_connected ? 'Connected' : 'Not Connected'}
                           </span>
@@ -181,9 +158,7 @@ const Home = () => {
 
                         {/* Subscription Plan */}
                         <div className="flex items-center gap-1">
-                          {profileData.subscription_plan !== 'free' && (
-                            <Crown className="h-4 w-4 text-yellow-400" />
-                          )}
+                          {profileData.subscription_plan !== 'free' && <Crown className="h-4 w-4 text-yellow-400" />}
                           <span className={`text-xs font-medium ${getPlanColor(profileData.subscription_plan)}`}>
                             {getPlanDisplayName(profileData.subscription_plan)}
                           </span>
@@ -208,10 +183,7 @@ const Home = () => {
                 <p className="text-gray-300 mb-6">
                   Generate engaging LinkedIn content with AI in minutes
                 </p>
-                <Button 
-                  onClick={handleCreatePost}
-                  className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3"
-                >
+                <Button onClick={handleCreatePost} className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3">
                   Start Creating
                 </Button>
               </CardContent>
@@ -227,10 +199,7 @@ const Home = () => {
                 <p className="text-gray-300 mb-6">
                   View, edit, and republish your previous posts
                 </p>
-                <Button 
-                  onClick={handleViewHistory}
-                  className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3"
-                >
+                <Button onClick={handleViewHistory} className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold rounded-full py-3">
                   View History
                 </Button>
               </CardContent>
@@ -238,8 +207,6 @@ const Home = () => {
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Home;
