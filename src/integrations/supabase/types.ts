@@ -9,6 +9,24 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      daily_tips: {
+        Row: {
+          created_at: string | null
+          id: string
+          tip_text: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          tip_text: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          tip_text?: string
+        }
+        Relationships: []
+      }
       posts: {
         Row: {
           content: string | null
@@ -53,6 +71,11 @@ export type Database = {
           email: string | null
           full_name: string | null
           id: string
+          linkedin_access_token: string | null
+          linkedin_connected: boolean | null
+          posts_this_month: number | null
+          subscription_plan: string | null
+          subscription_status: string | null
           updated_at: string
         }
         Insert: {
@@ -62,6 +85,11 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id: string
+          linkedin_access_token?: string | null
+          linkedin_connected?: boolean | null
+          posts_this_month?: number | null
+          subscription_plan?: string | null
+          subscription_status?: string | null
           updated_at?: string
         }
         Update: {
@@ -71,6 +99,11 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id?: string
+          linkedin_access_token?: string | null
+          linkedin_connected?: boolean | null
+          posts_this_month?: number | null
+          subscription_plan?: string | null
+          subscription_status?: string | null
           updated_at?: string
         }
         Relationships: []
