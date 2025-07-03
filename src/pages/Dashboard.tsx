@@ -8,7 +8,7 @@ import DashboardStats from "@/components/DashboardStats";
 import QuickActions from "@/components/QuickActions";
 import RecentPosts from "@/components/RecentPosts";
 import DailyTip from "@/components/DailyTip";
-import ProfileStatus from "@/components/ProfileStatus";
+import ProfileCard from "@/components/ProfileCard";
 
 const Dashboard = () => {
   const { user, signOut, loading } = useAuth();
@@ -72,7 +72,7 @@ const Dashboard = () => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="max-w-4xl mx-auto px-6 py-8">
         <div className="space-y-8">
           {/* Welcome Section */}
           <div className="space-y-2">
@@ -87,19 +87,16 @@ const Dashboard = () => {
           {/* Stats Overview */}
           <DashboardStats {...dashboardData} />
 
-          {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column - Main Content */}
-            <div className="lg:col-span-2 space-y-6">
-              <QuickActions />
-              <RecentPosts />
-            </div>
-
-            {/* Right Column - Sidebar */}
-            <div className="space-y-6">
-              <ProfileStatus />
-              <DailyTip />
-            </div>
+          {/* Single Column Layout */}
+          <div className="space-y-6">
+            {/* Profile Card */}
+            <ProfileCard />
+            
+            {/* Quick Actions */}
+            <QuickActions />
+            
+            {/* Recent Posts */}
+            <RecentPosts />
           </div>
         </div>
       </main>

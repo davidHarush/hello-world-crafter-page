@@ -48,12 +48,12 @@ const QuickActions = () => {
         <CardTitle className="text-white text-lg">Quick Actions</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3">
           {actions.map((action, index) => (
             <Button
               key={index}
               onClick={action.onClick}
-              className={`${action.color} text-white font-medium rounded-lg p-4 h-auto flex-col gap-2 transition-all duration-200 ${action.primary ? 'col-span-full sm:col-span-2' : ''}`}
+              className={`${action.color} text-white font-medium rounded-lg p-4 h-auto flex-col gap-2 transition-all duration-200`}
             >
               <action.icon className="h-5 w-5" />
               <div className="text-center">
