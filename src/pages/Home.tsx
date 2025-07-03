@@ -98,9 +98,7 @@ const Home = () => {
             <div className="flex items-center gap-4">
               <Avatar className="w-10 h-10">
                 
-                <AvatarFallback className="bg-pink-500 text-white">
-                  {user?.user_metadata?.full_name?.[0] || user?.email?.[0]?.toUpperCase() || 'U'}
-                </AvatarFallback>
+                
               </Avatar>
               <Button variant="ghost" size="sm" onClick={handleLogout} className="text-gray-300 hover:text-white hover:bg-gray-800">
                 <LogOut className="w-4 h-4 mr-2" />
